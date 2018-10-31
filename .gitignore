@@ -4,3 +4,4 @@ bundle.js/
 *.log
 *.pyc
 .DS_Store
+.egg-info/
