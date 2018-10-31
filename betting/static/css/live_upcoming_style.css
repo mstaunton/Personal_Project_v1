@@ -1,0 +1,8 @@
+.container-fluid {
+	font-size: 18pt;
+	border:2px black solid;
+}
+
+.row {
+	border:2px gray dotted;
+}

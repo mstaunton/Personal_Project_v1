@@ -1,0 +1,61 @@
+.schedule {
+	border:2px black solid;
+}
+
+.League_Schedule {
+	border:2px gray dotted;
+	margin:20px;
+}
+
+.game-info {
+	border:1px black solid;
+	margin:10px;
+	position:relative;
+}
+
+.game-info span {
+	font-size: 18pt;
+	position:absolute;
+	top:40%;
+}
+
+.home-info {
+	border:1px gray dashed;
+	display:inline-block;
+	width:40%;
+	margin-left:30px;
+}
+
+.home-info img {
+	height:75%;
+	width:25%;
+	padding:10px;
+	float:right;
+}
+
+.away-info {
+	border:1px gray dashed;
+	display:inline-block;
+	width:40%;
+	margin-right:30px;
+}
+
+.away-info img {
+	height:75%;
+	width:25%;
+	padding:10px;
+	float:left;
+}
+
+.game-info p {
+	font-size: 18pt;
+	position:absolute;
+	top:40%;
+	display: inline-block;
+	margin:0px;
+}
+
+.team-text {
+	padding:5px;
+	display:inline-block;
+}

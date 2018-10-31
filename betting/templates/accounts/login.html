@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<style>
+
+	body, html{
+		margin:0;
+		padding:0;
+		font-family: "Tahoma";
+    }
+
+    .header {
+	    background-color: midnightblue;
+		border: 3px solid yellow;
+		height:140px;
+		margin:20px;
+		margin-bottom:40px;
+		min-width:550px;
+	}
+
+	.header img {
+		height: 100px;
+		width: 150px;
+		float:left;
+		margin-top:20px;
+		margin-right:15px;
+		margin-left:20px;
+		margin-bottom:20px;
+	}
+
+	.title {
+		color: yellow;
+		padding-top:10px;
+	}
+
+	.navigation-bar a:hover{
+		color:yellow;
+	}
+
+	.menu-bar-item {
+		color: white;
+		padding-top:60px;
+		padding-right:7.5px;
+		padding-left:7.5px;
+		font-size: 1.2em;
+		text-decoration: none;
+	}
+	</style>
+	<title> LOGIN PAGE </title>
+</head>
+<body>
+	<div class = "header">
+    <img src="https://www.eecs.umich.edu/eecs/resources/assets/CSE/CSE-vertical-formal-rev.png" class="header-logo">
+    <div class = "header-title">
+        <h2 class = "title"><span class = "yellow-text">Human Computer Interaction (HCI)</span></h2>
+    </div>
+    <div class = "navigation-bar">
+      <a href="/register" class = "menu-bar-item">Welcome</a>
+      <a href="#news" class = "menu-bar-item">News</a>
+      <a href="#members" class = "menu-bar-item">Members</a>
+      <a href="#projects" class = "menu-bar-item">Lab Spotlights</a>
+    </div>
+  </div>
+	
+</b></b>
+
+	<form action="" method="post" enctype="multipart/form-data">
+        <div class="input-wrapper"><input type="text" name="username" placeholder="username"/></div>
+        <div class="input-wrapper"><input type="password" name="password" placeholder="password"/></div>
+        <div class="login-button-wrapper"><input type="submit" value="login"/></div>
+	 </form>
+	<br/>
+	Don't have an account? <a href="/accounts/create/"><b>
+		Sign up
+	</b></a>
+
+</body>
+</html>

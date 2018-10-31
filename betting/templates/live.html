@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+  	<link rel="stylesheet" type="text/css" href="/static/css/live_upcoming_style.css" />
+	<title> Live Bets </title>
+</head>
+<body>
+	<div class = "header">
+    <img src="bettinglogo" alt="Betting Logo Not Set" class="header-logo">
+    <div class = "header-title">
+        <h2 class = "title"><span class = "yellow-text">Bet Tracker</span></h2>
+    </div>
+    <div class = "navigation-bar">
+      <a href="/register/" class = "menu-bar-item">Register Bets</a>
+      <a href="/upcoming/" class = "menu-bar-item">Upcoming Bets</a>
+      <a href="/live/" class = "menu-bar-item">Live Bets</a>
+      <a href="/results/" class = "menu-bar-item">Results</a>
+    </div>
+  </div>
+
+  <div id="LiveEntry">Loading ...</div>
+  <!-- Load JavaScript -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/live.js') }}"></script>
+
+</body>
+</html>
