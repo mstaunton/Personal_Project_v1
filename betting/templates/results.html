@@ -1,51 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<style>
-	
-	body, html{
-		margin:0;
-		padding:0;
-		font-family: "Tahoma";
-    }
-
-    .header {
-	    background-color: midnightblue;
-		border: 3px solid yellow;
-		height:140px;
-		margin:20px;
-		margin-bottom:40px;
-		min-width:550px;
-	}
-
-	.header img {
-		height: 100px;
-		width: 150px;
-		float:left;
-		margin-top:20px;
-		margin-right:15px;
-		margin-left:20px;
-		margin-bottom:20px;
-	}
-
-	.title {
-		color: yellow;
-		padding-top:10px;
-	}
-
-	.navigation-bar a:hover{
-		color:yellow;
-	}
-
-	.menu-bar-item {
-		color: white;
-		padding-top:60px;
-		padding-right:7.5px;
-		padding-left:7.5px;
-		font-size: 1.2em;
-		text-decoration: none;
-	}
-	</style>
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+  	<link rel="stylesheet" type="text/css" href="/static/css/live_upcoming_style.css" />
 	<title> Results </title>
 </head>
 <body>
@@ -61,6 +18,10 @@
       <a href="/results/" class = "menu-bar-item">Results</a>
     </div>
   </div>
+
+  <div id="ResultsEntry">Loading ...</div>
+  <!-- Load JavaScript -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/results.js') }}"></script>
 
 </body>
 </html>

@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 40);
+/******/ 	return __webpack_require__(__webpack_require__.s = 44);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10184,7 +10184,11 @@ module.exports = function (css) {
 /* 37 */,
 /* 38 */,
 /* 39 */,
-/* 40 */
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10198,16 +10202,16 @@ var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _upcoming = __webpack_require__(41);
+var _results = __webpack_require__(45);
 
-var _upcoming2 = _interopRequireDefault(_upcoming);
+var _results2 = _interopRequireDefault(_results);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(_upcoming2.default, { api_key: 'de1cd71c-a44e-432e-93d2-0ec60e' }), document.getElementById('UpcomingEntry'));
+_reactDom2.default.render(_react2.default.createElement(_results2.default, { api_key: 'de1cd71c-a44e-432e-93d2-0ec60e' }), document.getElementById('ResultsEntry'));
 
 /***/ }),
-/* 41 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10231,22 +10235,29 @@ __webpack_require__(31);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Upcoming = function (_React$Component) {
-	_inherits(Upcoming, _React$Component);
+var Results = function (_React$Component) {
+	_inherits(Results, _React$Component);
 
-	function Upcoming(props) {
-		_classCallCheck(this, Upcoming);
+	function Results(props) {
+		_classCallCheck(this, Results);
 
-		var _this = _possibleConstructorReturn(this, (Upcoming.__proto__ || Object.getPrototypeOf(Upcoming)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this, props));
 
 		_this.state = {
-			list_bets: [{ "betid": "3", "date": "10/31/2018", "time": "10:30 PM", "game": "Lakers @ Mavs", "selection": "Lakers", "spread": "-6.5", "wager": "11", "to_win": "10" }, { "betid": "4", "date": "10/31/2018", "time": "10:30 PM", "game": "Lakers @ Mavs", "selection": "OVER", "spread": "235", "wager": "5", "to_win": "4.50" }],
+			list_results: [{ "betid": "1", "date": "10/30/2018", "game": "Jazz @ T-Wolves", "selection": "T-Wolves", "spread": "-2", "result": -20 }, { "betid": "2", "date": "10/31/2018", "game": "Jazz @ T-Wolves", "selection": "OVER", "spread": "250", "result": 10 }, { "betid": "3", "date": "10/31/2018", "game": "Nuggets @ Bulls", "selection": "Bulls", "spread": "-3", "result": -10 }, { "betid": "4", "date": "10/31/2018", "game": "Pacers @ Knicks", "selection": "Pacers", "spread": "-6", "result": 0 }],
+			total_value: 0,
+			wins: 0,
+			losses: 0,
+			push: 0,
+			range: '',
 			league: ''
 		};
 		_this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -10254,7 +10265,7 @@ var Upcoming = function (_React$Component) {
 		return _this;
 	}
 
-	_createClass(Upcoming, [{
+	_createClass(Results, [{
 		key: 'handleSubmit',
 		value: function handleSubmit(event) {
 			// Select only upcoming bets for a specific League
@@ -10264,9 +10275,7 @@ var Upcoming = function (_React$Component) {
 	}, {
 		key: 'handleChange',
 		value: function handleChange(event) {
-			this.setState({
-				league: event.target.value
-			});
+			this.setState(_defineProperty({}, event.target.name, event.target.value));
 		}
 	}, {
 		key: 'componentDidMount',
@@ -10277,14 +10286,42 @@ var Upcoming = function (_React$Component) {
 	}, {
 		key: 'render',
 		value: function render() {
-			var bets = this.state.list_bets;
+			var _this2 = this;
+
+			var results = this.state.list_results;
+			results.map(function (item) {
+				if (item.result > 0) {
+					_this2.state.wins += 1;
+				} else if (item.result < 0) {
+					_this2.state.losses += 1;
+				} else {
+					_this2.state.push += 1;
+				}
+				_this2.state.total_value += item.result;
+			});
 			return _react2.default.createElement(
 				'div',
 				null,
 				_react2.default.createElement(
 					'h2',
 					null,
-					' Upcoming Bets '
+					' Results '
+				),
+				_react2.default.createElement(
+					'h4',
+					null,
+					' Record(W-L-P): ',
+					this.state.wins,
+					'-',
+					this.state.losses,
+					'-',
+					this.state.push
+				),
+				_react2.default.createElement(
+					'h4',
+					null,
+					' Total: ',
+					this.state.total_value
 				),
 				_react2.default.createElement(
 					'div',
@@ -10292,6 +10329,35 @@ var Upcoming = function (_React$Component) {
 					_react2.default.createElement(
 						'form',
 						{ onSubmit: this.handleSubmit },
+						_react2.default.createElement(
+							'select',
+							{ value: this.state.range, onChange: this.handleChange },
+							_react2.default.createElement(
+								'option',
+								{ value: 'Default' },
+								'Select a Range'
+							),
+							_react2.default.createElement(
+								'option',
+								{ value: '1' },
+								'Today'
+							),
+							_react2.default.createElement(
+								'option',
+								{ value: '7' },
+								'7 days'
+							),
+							_react2.default.createElement(
+								'option',
+								{ value: '30' },
+								'30 days'
+							),
+							_react2.default.createElement(
+								'option',
+								{ value: 'All_Time' },
+								'All Time'
+							)
+						),
 						_react2.default.createElement(
 							'select',
 							{ value: this.state.league, onChange: this.handleChange },
@@ -10327,16 +10393,14 @@ var Upcoming = function (_React$Component) {
 				_react2.default.createElement(
 					'div',
 					{ className: 'container-fluid' },
-					bets.map(function (bet) {
-						return _react2.default.createElement(Bet, {
-							key: bet.bet_id,
-							date: bet.date,
-							time: bet.time,
-							game: bet.game,
-							selection: bet.selection,
-							spread: bet.spread,
-							wager: bet.wager,
-							to_win: bet.to_win
+					results.map(function (comp_bet) {
+						return _react2.default.createElement(Result, {
+							key: comp_bet.betid,
+							date: comp_bet.date,
+							game: comp_bet.game,
+							selection: comp_bet.selection,
+							spread: comp_bet.spread,
+							result: comp_bet.result
 						});
 					})
 				)
@@ -10344,20 +10408,23 @@ var Upcoming = function (_React$Component) {
 		}
 	}]);
 
-	return Upcoming;
+	return Results;
 }(_react2.default.Component);
 
-var Bet = function Bet(props) {
+function Result(props) {
+	var outcome = 'PUSH';
+	if (props.result > 0) {
+		outcome = 'WIN';
+	} else if (props.result < 0) {
+		outcome = 'LOSS';
+	}
 	return _react2.default.createElement(
 		'div',
 		{ className: 'row' },
 		_react2.default.createElement(
 			'div',
 			{ className: 'col' },
-			props.date,
-			' @ ',
-			props.time,
-			' ET'
+			props.date
 		),
 		_react2.default.createElement(
 			'div',
@@ -10367,22 +10434,25 @@ var Bet = function Bet(props) {
 		_react2.default.createElement(
 			'div',
 			{ className: 'col' },
-			props.selection,
-			'   ',
+			_react2.default.createElement(
+				'b',
+				null,
+				props.selection
+			),
+			'  ',
 			props.spread
 		),
 		_react2.default.createElement(
 			'div',
 			{ className: 'col' },
-			'Wager: $',
-			props.wager,
-			'   To Win: $',
-			props.to_win
+			outcome,
+			'  $',
+			props.result
 		)
 	);
 };
 
-exports.default = Upcoming;
+exports.default = Results;
 
 /***/ })
 /******/ ]);

@@ -10248,7 +10248,7 @@ var Upcoming = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (Upcoming.__proto__ || Object.getPrototypeOf(Upcoming)).call(this, props));
 
 		_this.state = {
-			list_bets: [{ "betid": "3", "date": "10/31/2018", "time": "10:30 PM", "name": "Lakers", "spread": "-6.5", "wager": "11", "to_win": "10" }, { "betid": "4", "date": "10/31/2018", "time": "10:30 PM", "name": "Lakers/Mavs", "spread": "OVER 235", "wager": "5", "to_win": "4.50" }],
+			list_bets: [{ "betid": "3", "date": "10/31/2018", "time": "10:30 PM", "game": "Lakers @ Mavs", "selection": "Lakers", "spread": "-6.5", "wager": "11", "to_win": "10" }, { "betid": "4", "date": "10/31/2018", "time": "10:30 PM", "game": "Lakers @ Mavs", "selection": "OVER", "spread": "235", "wager": "5", "to_win": "4.50" }],
 			league: ''
 		};
 		_this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -10332,7 +10332,8 @@ var Upcoming = function (_React$Component) {
 					bets.map(function (bet) {
 						return _react2.default.createElement(Bet, {
 							key: bet.bet_id,
-							name: bet.name,
+							game: bet.game,
+							selection: bet.selection,
 							spread: bet.spread,
 							wager: bet.wager,
 							to_win: bet.to_win
@@ -10353,8 +10354,13 @@ var Bet = function Bet(props) {
 		_react2.default.createElement(
 			'div',
 			{ className: 'col' },
-			props.name,
-			' ',
+			props.game
+		),
+		_react2.default.createElement(
+			'div',
+			{ className: 'col' },
+			props.selection,
+			'   ',
 			props.spread
 		),
 		_react2.default.createElement(

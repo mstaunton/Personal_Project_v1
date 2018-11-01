@@ -6,7 +6,7 @@ class Upcoming extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			list_bets: [{"betid":"3","date":"10/31/2018","time":"10:30 PM","name":"Lakers","spread":"-6.5","wager":"11","to_win":"10"},{"betid":"4","date":"10/31/2018","time":"10:30 PM","name":"Lakers/Mavs","spread":"OVER 235","wager":"5","to_win":"4.50"}],
+			list_bets: [{"betid":"3","date":"10/31/2018","time":"10:30 PM","game":"Lakers @ Mavs", "selection":"Lakers","spread":"-6.5","wager":"11","to_win":"10"},{"betid":"4","date":"10/31/2018","time":"10:30 PM","game":"Lakers @ Mavs", "selection":"OVER","spread":"235","wager":"5","to_win":"4.50"}],
 			league: '',
 		}
 		this.handleSubmit=this.handleSubmit.bind(this);
@@ -50,7 +50,8 @@ class Upcoming extends React.Component {
 					{bets.map(bet => 
 						(<Bet 
 							key={bet.bet_id}
-							name={bet.name}
+							game={bet.game}
+							selection={bet.selection}
 							spread={bet.spread}
 							wager={bet.wager}
 							to_win={bet.to_win}
@@ -65,7 +66,10 @@ class Upcoming extends React.Component {
 const Bet = props => (
   <div className="row">
   	<div className="col">
-  		{props.name} {props.spread}
+  		{props.game}
+  	</div>
+  	<div className="col">
+  		{props.selection}   {props.spread}
   	</div>
   	<div className="col">
   		Wager: ${props.wager} To Win: ${props.to_win}

@@ -125,7 +125,7 @@ function Total_Bet(props) {
 	return (
 		<div className="bet-input">
 			<select>
-				<option value="Default">Please Select a Team</option>
+				<option value="Default">--Select--</option>
 				<option value="Over">Over</option>
 				<option value="Under">Under</option>
 			</select>

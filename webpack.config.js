@@ -4,7 +4,8 @@ module.exports = {
   entry: {
     register: './betting/js/main_register.jsx',
     upcoming: './betting/js/main_upcoming.jsx',
-    live: './betting/js/main_live.jsx'
+    live: './betting/js/main_live.jsx',
+    results: './betting/js/main_results.jsx'
   },
   output: {
     path: path.join(__dirname, '/betting/static/js/'),

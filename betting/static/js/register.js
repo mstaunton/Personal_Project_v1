@@ -10056,7 +10056,7 @@ function Total_Bet(props) {
 			_react2.default.createElement(
 				'option',
 				{ value: 'Default' },
-				'Please Select a Team'
+				'--Select--'
 			),
 			_react2.default.createElement(
 				'option',
