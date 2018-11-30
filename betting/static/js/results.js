@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 44);
+/******/ 	return __webpack_require__(__webpack_require__.s = 45);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -462,9 +462,9 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(16);
-} else {
   module.exports = __webpack_require__(17);
+} else {
+  module.exports = __webpack_require__(18);
 }
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
@@ -712,11 +712,11 @@ if (process.env.NODE_ENV !== 'production') {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(29)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(30)(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(30)();
+  module.exports = __webpack_require__(31)();
 }
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
@@ -890,7 +890,7 @@ module.exports = shallowEqual;
  * 
  */
 
-var isTextNode = __webpack_require__(20);
+var isTextNode = __webpack_require__(21);
 
 /*eslint-disable no-bitwise */
 
@@ -992,6 +992,56 @@ module.exports = getActiveElement;
 
 /***/ }),
 /* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(32);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(34)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {
+	module.hot.accept("!!../../../css-loader/index.js!./bootstrap.min.css", function() {
+		var newContent = require("!!../../../css-loader/index.js!./bootstrap.min.css");
+
+		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1121,7 +1171,7 @@ module.exports = { Children: { map: S.map, forEach: S.forEach, count: S.count, t
     } }, Component: B.Component, PureComponent: B.PureComponent, unstable_AsyncComponent: B.AsyncComponent, createElement: G.createElement, cloneElement: G.cloneElement, isValidElement: G.isValidElement, createFactory: G.createFactory, version: "16.0.0", __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: { ReactCurrentOwner: C, assign: f } };
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2824,7 +2874,7 @@ if (process.env.NODE_ENV !== "production") {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2859,14 +2909,14 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(19);
+  module.exports = __webpack_require__(20);
 } else {
-  module.exports = __webpack_require__(22);
+  module.exports = __webpack_require__(23);
 }
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5266,7 +5316,7 @@ var ek = { createPortal: dk, hydrate: function hydrate(a, b, c) {
   unstable_deferredUpdates: Xj.deferredUpdates, flushSync: Xj.flushSync, __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: { EventPluginHub: Jb, EventPluginRegistry: sa, EventPropagators: Th, ReactControlledComponent: nb, ReactDOMComponentTree: G, ReactDOMEventListener: L } };Cj({ findFiberByHostInstance: G.getClosestInstanceFromNode, findHostInstanceByFiber: Xj.findHostInstance, bundleType: 0, version: "16.0.0", rendererPackageName: "react-dom" });module.exports = ek;
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5281,7 +5331,7 @@ var ek = { createPortal: dk, hydrate: function hydrate(a, b, c) {
  * @typechecks
  */
 
-var isNode = __webpack_require__(21);
+var isNode = __webpack_require__(22);
 
 /**
  * @param {*} object The object to check.
@@ -5294,7 +5344,7 @@ function isTextNode(object) {
 module.exports = isTextNode;
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5325,7 +5375,7 @@ function isNode(object) {
 module.exports = isNode;
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5336,7 +5386,7 @@ module.exports = isNode;
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
- */var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};if(process.env.NODE_ENV!=="production"){(function(){'use strict';var react=__webpack_require__(4);var invariant=__webpack_require__(2);var ExecutionEnvironment=__webpack_require__(9);var _assign=__webpack_require__(3);var EventListener=__webpack_require__(11);var require$$0=__webpack_require__(6);var hyphenateStyleName=__webpack_require__(23);var emptyFunction=__webpack_require__(1);var camelizeStyleName=__webpack_require__(25);var performanceNow=__webpack_require__(27);var propTypes=__webpack_require__(10);var emptyObject=__webpack_require__(5);var checkPropTypes=__webpack_require__(7);var shallowEqual=__webpack_require__(12);var containsNode=__webpack_require__(13);var focusNode=__webpack_require__(14);var getActiveElement=__webpack_require__(15);/**
+ */var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol&&obj!==Symbol.prototype?"symbol":typeof obj;};if(process.env.NODE_ENV!=="production"){(function(){'use strict';var react=__webpack_require__(4);var invariant=__webpack_require__(2);var ExecutionEnvironment=__webpack_require__(9);var _assign=__webpack_require__(3);var EventListener=__webpack_require__(11);var require$$0=__webpack_require__(6);var hyphenateStyleName=__webpack_require__(24);var emptyFunction=__webpack_require__(1);var camelizeStyleName=__webpack_require__(26);var performanceNow=__webpack_require__(28);var propTypes=__webpack_require__(10);var emptyObject=__webpack_require__(5);var checkPropTypes=__webpack_require__(7);var shallowEqual=__webpack_require__(12);var containsNode=__webpack_require__(13);var focusNode=__webpack_require__(14);var getActiveElement=__webpack_require__(15);/**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
  * This source code is licensed under the MIT license found in the
@@ -8730,7 +8780,7 @@ if(/^(https?|file):$/.test(protocol)){console.info('%cDownload the React DevTool
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8745,7 +8795,7 @@ if(/^(https?|file):$/.test(protocol)){console.info('%cDownload the React DevTool
 
 
 
-var hyphenate = __webpack_require__(24);
+var hyphenate = __webpack_require__(25);
 
 var msPattern = /^ms-/;
 
@@ -8772,7 +8822,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8808,7 +8858,7 @@ function hyphenate(string) {
 module.exports = hyphenate;
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8823,7 +8873,7 @@ module.exports = hyphenate;
 
 
 
-var camelize = __webpack_require__(26);
+var camelize = __webpack_require__(27);
 
 var msPattern = /^-ms-/;
 
@@ -8851,7 +8901,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8886,7 +8936,7 @@ function camelize(string) {
 module.exports = camelize;
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8901,7 +8951,7 @@ module.exports = camelize;
  * @typechecks
  */
 
-var performance = __webpack_require__(28);
+var performance = __webpack_require__(29);
 
 var performanceNow;
 
@@ -8923,7 +8973,7 @@ if (performance.now) {
 module.exports = performanceNow;
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8949,7 +8999,7 @@ if (ExecutionEnvironment.canUseDOM) {
 module.exports = performance || {};
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9474,7 +9524,7 @@ module.exports = function (isValidElement, throwOnDirectAccess) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9531,56 +9581,6 @@ module.exports = function () {
 
   return ReactPropTypes;
 };
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(32);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(34)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {
-	module.hot.accept("!!../../../css-loader/index.js!./bootstrap.min.css", function() {
-		var newContent = require("!!../../../css-loader/index.js!./bootstrap.min.css");
-
-		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-
-		var locals = (function(a, b) {
-			var key, idx = 0;
-
-			for(key in a) {
-				if(!b || a[key] !== b[key]) return false;
-				idx++;
-			}
-
-			for(key in b) idx--;
-
-			return idx === 0;
-		}(content.locals, newContent.locals));
-
-		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
-
-		update(newContent);
-	});
-
-	module.hot.dispose(function() { update(); });
-}
 
 /***/ }),
 /* 32 */
@@ -10188,7 +10188,8 @@ module.exports = function (css) {
 /* 41 */,
 /* 42 */,
 /* 43 */,
-/* 44 */
+/* 44 */,
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10198,11 +10199,11 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(18);
+var _reactDom = __webpack_require__(19);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _results = __webpack_require__(45);
+var _results = __webpack_require__(46);
 
 var _results2 = _interopRequireDefault(_results);
 
@@ -10211,14 +10212,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _reactDom2.default.render(_react2.default.createElement(_results2.default, { api_key: 'de1cd71c-a44e-432e-93d2-0ec60e' }), document.getElementById('ResultsEntry'));
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -10231,7 +10232,7 @@ var _propTypes = __webpack_require__(10);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-__webpack_require__(31);
+__webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10244,212 +10245,230 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Results = function (_React$Component) {
-	_inherits(Results, _React$Component);
+  _inherits(Results, _React$Component);
 
-	function Results(props) {
-		_classCallCheck(this, Results);
+  function Results(props) {
+    _classCallCheck(this, Results);
 
-		var _this = _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this, props));
 
-		_this.state = {
-			list_results: [{ "betid": "1", "date": "10/30/2018", "game": "Jazz @ T-Wolves", "selection": "T-Wolves", "spread": "-2", "result": -20 }, { "betid": "2", "date": "10/31/2018", "game": "Jazz @ T-Wolves", "selection": "OVER", "spread": "250", "result": 10 }, { "betid": "3", "date": "10/31/2018", "game": "Nuggets @ Bulls", "selection": "Bulls", "spread": "-3", "result": -10 }, { "betid": "4", "date": "10/31/2018", "game": "Pacers @ Knicks", "selection": "Pacers", "spread": "-6", "result": 0 }],
-			total_value: 0,
-			wins: 0,
-			losses: 0,
-			push: 0,
-			range: '',
-			league: ''
-		};
-		_this.handleSubmit = _this.handleSubmit.bind(_this);
-		_this.handleChange = _this.handleChange.bind(_this);
-		return _this;
-	}
+    _this.state = {
+      list_results: [{
+        betid: '1',
+        date: '10/30/2018',
+        game: 'Jazz @ T-Wolves',
+        selection: 'T-Wolves',
+        spread: '-2',
+        result: -20
+      }],
+      total_value: 0,
+      wins: 0,
+      losses: 0,
+      push: 0,
+      range: '',
+      league: ''
+    };
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.handleChange = _this.handleChange.bind(_this);
+    return _this;
+  }
 
-	_createClass(Results, [{
-		key: 'handleSubmit',
-		value: function handleSubmit(event) {
-			// Select only upcoming bets for a specific League
-			event.preventDefault();
-			console.log("Submit Button Pressed");
-		}
-	}, {
-		key: 'handleChange',
-		value: function handleChange(event) {
-			this.setState(_defineProperty({}, event.target.name, event.target.value));
-		}
-	}, {
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			// Get all upcoming bets for logged in user
-			console.log("Component Did Mount");
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var _this2 = this;
+  _createClass(Results, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      // Get all upcoming bets for logged in user
+      console.log(this.props.api_key);
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(event) {
+      // Select only upcoming bets for a specific League
+      event.preventDefault();
+    }
+  }, {
+    key: 'handleChange',
+    value: function handleChange(event) {
+      this.setState(_defineProperty({}, event.target.name, event.target.value));
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
 
-			var results = this.state.list_results;
-			results.map(function (item) {
-				if (item.result > 0) {
-					_this2.state.wins += 1;
-				} else if (item.result < 0) {
-					_this2.state.losses += 1;
-				} else {
-					_this2.state.push += 1;
-				}
-				_this2.state.total_value += item.result;
-			});
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'h2',
-					null,
-					' Results '
-				),
-				_react2.default.createElement(
-					'h4',
-					null,
-					' Record(W-L-P): ',
-					this.state.wins,
-					'-',
-					this.state.losses,
-					'-',
-					this.state.push
-				),
-				_react2.default.createElement(
-					'h4',
-					null,
-					' Total: ',
-					this.state.total_value
-				),
-				_react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(
-						'form',
-						{ onSubmit: this.handleSubmit },
-						_react2.default.createElement(
-							'select',
-							{ value: this.state.range, onChange: this.handleChange },
-							_react2.default.createElement(
-								'option',
-								{ value: 'Default' },
-								'Select a Range'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: '1' },
-								'Today'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: '7' },
-								'7 days'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: '30' },
-								'30 days'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'All_Time' },
-								'All Time'
-							)
-						),
-						_react2.default.createElement(
-							'select',
-							{ value: this.state.league, onChange: this.handleChange },
-							_react2.default.createElement(
-								'option',
-								{ value: 'Default' },
-								'Select a League'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'MLB' },
-								'MLB'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'NFL' },
-								'NFL'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'NBA' },
-								'NBA'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'NHL' },
-								'NHL'
-							)
-						),
-						_react2.default.createElement('input', { type: 'submit', value: 'Submit' })
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'container-fluid' },
-					results.map(function (comp_bet) {
-						return _react2.default.createElement(Result, {
-							key: comp_bet.betid,
-							date: comp_bet.date,
-							game: comp_bet.game,
-							selection: comp_bet.selection,
-							spread: comp_bet.spread,
-							result: comp_bet.result
-						});
-					})
-				)
-			);
-		}
-	}]);
+      var results = this.state.list_results;
+      results.map(function (item) {
+        if (item.result > 0) {
+          _this2.state.wins += 1;
+        } else if (item.result < 0) {
+          _this2.state.losses += 1;
+        } else {
+          _this2.state.push += 1;
+        }
+        _this2.state.total_value += item.result;
+      });
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h2',
+          null,
+          ' Results '
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          ' Record(W-L-P): ',
+          this.state.wins,
+          '-',
+          this.state.losses,
+          '-',
+          this.state.push
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          ' Total: ',
+          this.state.total_value
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'form',
+            { onSubmit: this.handleSubmit },
+            _react2.default.createElement(
+              'select',
+              { value: this.state.range, onChange: this.handleChange },
+              _react2.default.createElement(
+                'option',
+                { value: 'Default' },
+                'Select a Range'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: '1' },
+                'Today'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: '7' },
+                '7 days'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: '30' },
+                '30 days'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'All_Time' },
+                'All Time'
+              )
+            ),
+            _react2.default.createElement(
+              'select',
+              { value: this.state.league, onChange: this.handleChange },
+              _react2.default.createElement(
+                'option',
+                { value: 'Default' },
+                'Select a League'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'MLB' },
+                'MLB'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'NFL' },
+                'NFL'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'NBA' },
+                'NBA'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'NHL' },
+                'NHL'
+              )
+            ),
+            _react2.default.createElement('input', { type: 'submit', value: 'Submit' })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'container-fluid' },
+          results.map(function (comp_bet) {
+            return _react2.default.createElement(Result, {
+              key: comp_bet.betid,
+              date: comp_bet.date,
+              game: comp_bet.game,
+              selection: comp_bet.selection,
+              spread: comp_bet.spread,
+              result: comp_bet.result
+            });
+          })
+        )
+      );
+    }
+  }]);
 
-	return Results;
+  return Results;
 }(_react2.default.Component);
 
 function Result(props) {
-	var outcome = 'PUSH';
-	if (props.result > 0) {
-		outcome = 'WIN';
-	} else if (props.result < 0) {
-		outcome = 'LOSS';
-	}
-	return _react2.default.createElement(
-		'div',
-		{ className: 'row' },
-		_react2.default.createElement(
-			'div',
-			{ className: 'col' },
-			props.date
-		),
-		_react2.default.createElement(
-			'div',
-			{ className: 'col' },
-			props.game
-		),
-		_react2.default.createElement(
-			'div',
-			{ className: 'col' },
-			_react2.default.createElement(
-				'b',
-				null,
-				props.selection
-			),
-			'  ',
-			props.spread
-		),
-		_react2.default.createElement(
-			'div',
-			{ className: 'col' },
-			outcome,
-			'  $',
-			props.result
-		)
-	);
+  var outcome = 'PUSH';
+  if (props.result > 0) {
+    outcome = 'WIN';
+  } else if (props.result < 0) {
+    outcome = 'LOSS';
+  }
+  return _react2.default.createElement(
+    'div',
+    { className: 'row' },
+    _react2.default.createElement(
+      'div',
+      { className: 'col' },
+      props.date
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'col' },
+      props.game
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'col' },
+      _react2.default.createElement(
+        'b',
+        null,
+        props.selection
+      ),
+      '  ',
+      props.spread
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'col' },
+      outcome,
+      '  $',
+      props.result
+    )
+  );
+}
+
+Result.propTypes = {
+  api_key: _propTypes2.default.string.isRequired
+};
+
+Bet.propTypes = {
+  date: _propTypes2.default.string.isRequired,
+  game: _propTypes2.default.string.isRequired,
+  selection: _propTypes2.default.string.isRequired,
+  spread: _propTypes2.default.string.isRequired,
+  result: _propTypes2.default.number.isRequired
 };
 
 exports.default = Results;

@@ -2,6 +2,15 @@
 	border:2px black solid;
 }
 
+.logo {
+	height: 75%;
+	width: 75%;
+}
+
+.At_sign {
+	font-size:20pt;
+}
+
 .League_Schedule {
 	border:2px gray dotted;
 	margin:20px;
@@ -58,4 +67,9 @@
 .team-text {
 	padding:5px;
 	display:inline-block;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
 }
