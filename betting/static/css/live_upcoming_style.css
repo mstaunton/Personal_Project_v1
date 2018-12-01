@@ -1,8 +1,12 @@
-.container-fluid {
-	font-size: 18pt;
-	border:2px black solid;
+.table th {
+	text-align: center;
 }
 
-.row {
-	border:2px gray dotted;
+.table td {
+	text-align: center;
+}
+
+.table {
+	padding-right:10px;
+	padding-left:40px;
 }

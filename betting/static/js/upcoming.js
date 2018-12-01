@@ -10247,25 +10247,7 @@ var Upcoming = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Upcoming.__proto__ || Object.getPrototypeOf(Upcoming)).call(this, props));
 
     _this.state = {
-      list_bets: [{
-        betid: '3',
-        date: '10/31/2018',
-        time: '10:30 PM',
-        game: 'Lakers @ Mavs',
-        selection: 'Lakers',
-        spread: '-6.5',
-        wager: '11',
-        to_win: '10'
-      }, {
-        betid: '4',
-        date: '10/31/2018',
-        time: '10:30 PM',
-        game: 'Lakers @ Mavs',
-        selection: 'OVER',
-        spread: '235',
-        wager: '5',
-        to_win: '4.50'
-      }],
+      list_bets: [],
       league: ''
     };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -10276,8 +10258,19 @@ var Upcoming = function (_React$Component) {
   _createClass(Upcoming, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var _this2 = this;
+
       // Get all upcoming bets for logged in user
-      console.log(this.props.api_key);
+      fetch('/api/v1/upcoming', { credentials: 'same-origin' }).then(function (response) {
+        if (!response.ok) throw Error(response.statusText);
+        return response.json();
+      }).then(function (data) {
+        _this2.setState({
+          list_bets: data.bets
+        });
+      }).catch(function (error) {
+        return console.log(error);
+      }); // eslint-disable-line no-console
     }
   }, {
     key: 'handleSubmit',
@@ -10344,20 +10337,69 @@ var Upcoming = function (_React$Component) {
           )
         ),
         _react2.default.createElement(
-          'div',
-          { className: 'container-fluid' },
-          bets.map(function (bet) {
-            return _react2.default.createElement(Bet, {
-              key: bet.bet_id,
-              date: bet.date,
-              time: bet.time,
-              game: bet.game,
-              selection: bet.selection,
-              spread: bet.spread,
-              wager: bet.wager,
-              to_win: bet.to_win
-            });
-          })
+          'table',
+          { className: 'table table-striped' },
+          _react2.default.createElement(
+            'thead',
+            { className: 'thead-dark' },
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'th',
+                { scope: 'col' },
+                'Date'
+              ),
+              _react2.default.createElement(
+                'th',
+                { scope: 'col' },
+                'Time'
+              ),
+              _react2.default.createElement(
+                'th',
+                { scope: 'col' },
+                'Game'
+              ),
+              _react2.default.createElement(
+                'th',
+                { scope: 'col' },
+                'Selection'
+              ),
+              _react2.default.createElement(
+                'th',
+                { scope: 'col' },
+                'Odds'
+              ),
+              _react2.default.createElement(
+                'th',
+                { scope: 'col' },
+                'Wager'
+              ),
+              _react2.default.createElement(
+                'th',
+                { scope: 'col' },
+                'To Win'
+              ),
+              _react2.default.createElement('th', { scope: 'col' })
+            )
+          ),
+          _react2.default.createElement(
+            'tbody',
+            null,
+            bets.map(function (bet) {
+              return _react2.default.createElement(Bet, {
+                key: bet.bet_id,
+                date: bet.bet_date,
+                time: bet.bet_time,
+                game: bet.game,
+                selection: bet.selection,
+                spread: bet.spread,
+                odds: bet.odds,
+                wager: bet.wager,
+                to_win: bet.to_win
+              });
+            })
+          )
         )
       );
     }
@@ -10368,35 +10410,60 @@ var Upcoming = function (_React$Component) {
 
 var Bet = function Bet(props) {
   return _react2.default.createElement(
-    'div',
-    { className: 'row' },
+    'tr',
+    null,
     _react2.default.createElement(
-      'div',
-      { className: 'col' },
-      props.date,
-      ' @ ',
+      'td',
+      null,
+      props.date
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
       props.time,
       ' ET'
     ),
     _react2.default.createElement(
-      'div',
-      { className: 'col' },
+      'td',
+      null,
       props.game
     ),
     _react2.default.createElement(
-      'div',
-      { className: 'col' },
+      'td',
+      null,
       props.selection,
-      '   ',
+      ' ',
       props.spread
     ),
     _react2.default.createElement(
-      'div',
-      { className: 'col' },
-      'Wager: $',
-      props.wager,
-      '   To Win: $',
+      'td',
+      null,
+      props.odds
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
+      '$',
+      props.wager
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
+      '$',
       props.to_win
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
+      _react2.default.createElement(
+        'button',
+        { type: 'button', 'class': 'close', 'aria-label': 'Close' },
+        _react2.default.createElement(
+          'span',
+          { 'aria-hidden': 'true' },
+          '\xD7'
+        )
+      )
     )
   );
 };

@@ -6,28 +6,7 @@ class Upcoming extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list_bets: [
-        {
-          betid: '3',
-          date: '10/31/2018',
-          time: '10:30 PM',
-          game: 'Lakers @ Mavs',
-          selection: 'Lakers',
-          spread: '-6.5',
-          wager: '11',
-          to_win: '10',
-        },
-        {
-          betid: '4',
-          date: '10/31/2018',
-          time: '10:30 PM',
-          game: 'Lakers @ Mavs',
-          selection: 'OVER',
-          spread: '235',
-          wager: '5',
-          to_win: '4.50',
-        },
-      ],
+      list_bets: [],
       league: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,7 +15,17 @@ class Upcoming extends React.Component {
 
 
   componentDidMount() { // Get all upcoming bets for logged in user
-    console.log(this.props.api_key);
+    fetch('/api/v1/upcoming', { credentials: 'same-origin' })
+      .then((response) => {
+        if (!response.ok) throw Error(response.statusText);
+        return response.json();
+      })
+      .then((data) => {
+        this.setState({
+          list_bets: data.bets
+        });
+      })
+      .catch(error => console.log(error)); // eslint-disable-line no-console
 
   }
 
@@ -68,40 +57,55 @@ class Upcoming extends React.Component {
             <input type="submit" value="Submit" />
           </form>
         </div>
-        <div className="container-fluid">
-          {bets.map(bet =>
-            (<Bet
-              key={bet.bet_id}
-              date={bet.date}
-              time={bet.time}
-              game={bet.game}
-              selection={bet.selection}
-              spread={bet.spread}
-              wager={bet.wager}
-              to_win={bet.to_win}
-            />),
-          )}
-        </div>
+        <table className="table table-striped">
+          <thead className="thead-dark">
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+              <th scope="col">Game</th>
+              <th scope="col">Selection</th>
+              <th scope="col">Odds</th>
+              <th scope="col">Wager</th>
+              <th scope="col">To Win</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {bets.map(bet =>
+              (<Bet
+                key={bet.bet_id}
+                date={bet.bet_date}
+                time={bet.bet_time}
+                game={bet.game}
+                selection={bet.selection}
+                spread={bet.spread}
+                odds={bet.odds}
+                wager={bet.wager}
+                to_win={bet.to_win}
+              />),
+            )}
+          </tbody>
+        </table>
       </div>
     );
   }
 }
 
 const Bet = props => (
-  <div className="row">
-    <div className="col">
-      {props.date} @ {props.time} ET
-    </div>
-    <div className="col">
-      {props.game}
-    </div>
-    <div className="col">
-      {props.selection}   {props.spread}
-    </div>
-    <div className="col">
-      Wager: ${props.wager}   To Win: ${props.to_win}
-    </div>
-  </div>);
+  <tr>
+    <td>{props.date}</td>
+    <td>{props.time} ET</td>
+    <td>{props.game}</td>
+    <td>{props.selection} {props.spread}</td>
+    <td>{props.odds}</td>
+    <td>${props.wager}</td>
+    <td>${props.to_win}</td>
+    <td>
+      <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </td>
+  </tr>);
 
 Upcoming.propTypes = {
   api_key: PropTypes.string.isRequired,

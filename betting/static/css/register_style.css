@@ -7,6 +7,34 @@
 	width: 75%;
 }
 
+.league_logo {
+	height:75%;
+	width:50px;
+	display: inline-block;
+}
+
+.schedule_input {
+	margin-bottom: 10px;
+}
+
+.row-centered {
+    text-align:center;
+}
+
+.league_header {
+	height:100px;
+	display: inline-block;
+	vertical-align: baseline;
+}
+
+.game {
+	border:1px black solid;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding:10px;
+	padding-right:25px;
+}
+
 .At_sign {
 	font-size:20pt;
 }

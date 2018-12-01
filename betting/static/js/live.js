@@ -10256,6 +10256,7 @@ var Live = function (_React$Component) {
         game: 'Lakers @ Mavs',
         selection: 'Lakers',
         spread: '-6.5',
+        odds: -110,
         wager: '11',
         to_win: '10'
       }, {
@@ -10265,6 +10266,7 @@ var Live = function (_React$Component) {
         game: 'Lakers @ Mavs',
         selection: 'OVER',
         spread: '235',
+        odds: -120,
         wager: '5',
         to_win: '4.50'
       }],
@@ -10346,18 +10348,56 @@ var Live = function (_React$Component) {
           )
         ),
         _react2.default.createElement(
-          'div',
-          { className: 'container-fluid' },
-          bets.map(function (bet) {
-            return _react2.default.createElement(Bet, {
-              key: bet.bet_id,
-              game: bet.game,
-              selection: bet.selection,
-              spread: bet.spread,
-              wager: bet.wager,
-              to_win: bet.to_win
-            });
-          })
+          'table',
+          { className: 'table table-striped' },
+          _react2.default.createElement(
+            'thead',
+            { className: 'thead-dark' },
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'th',
+                { scope: 'col' },
+                'Game'
+              ),
+              _react2.default.createElement(
+                'th',
+                { scope: 'col' },
+                'Selection'
+              ),
+              _react2.default.createElement(
+                'th',
+                { scope: 'col' },
+                'Odds'
+              ),
+              _react2.default.createElement(
+                'th',
+                { scope: 'col' },
+                'Wager'
+              ),
+              _react2.default.createElement(
+                'th',
+                { scope: 'col' },
+                'To Win'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'tbody',
+            null,
+            bets.map(function (bet) {
+              return _react2.default.createElement(Bet, {
+                key: bet.bet_id,
+                game: bet.game,
+                selection: bet.selection,
+                spread: bet.spread,
+                odds: bet.odds,
+                wager: bet.wager,
+                to_win: bet.to_win
+              });
+            })
+          )
         )
       );
     }
@@ -10368,26 +10408,35 @@ var Live = function (_React$Component) {
 
 var Bet = function Bet(props) {
   return _react2.default.createElement(
-    'div',
-    { className: 'row' },
+    'tr',
+    null,
     _react2.default.createElement(
-      'div',
-      { className: 'col' },
+      'td',
+      null,
       props.game
     ),
     _react2.default.createElement(
-      'div',
-      { className: 'col' },
+      'td',
+      null,
       props.selection,
-      '   ',
+      ' ',
       props.spread
     ),
     _react2.default.createElement(
-      'div',
-      { className: 'col' },
-      'Wager: $',
-      props.wager,
-      ' To Win: $',
+      'td',
+      null,
+      props.odds
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
+      '$',
+      props.wager
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
+      '$',
       props.to_win
     )
   );
