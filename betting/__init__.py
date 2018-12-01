@@ -18,5 +18,6 @@ app.config.from_envvar('BETTING_SETTINGS', silent=True)
 # circular import, which is naughty, but Flask was designed that way.
 # (Reference http://flask.pocoo.org/docs/0.12/patterns/packages/)  We're
 # going to tell pylint and pycodestyle to ignore this coding style violation.
+import betting.api  # noqa: E402  pylint: disable=wrong-import-position
 import betting.views  # noqa: E402  pylint: disable=wrong-import-position
 import betting.model  # noqa: E402  pylint: disable=wrong-import-position
