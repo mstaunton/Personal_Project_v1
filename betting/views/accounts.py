@@ -1,5 +1,7 @@
+"""Betting Account Views."""
 import flask
 import betting
+
 
 @betting.app.route('/accounts/login/', methods=['GET', 'POST'])
 def login_page():
@@ -8,9 +10,10 @@ def login_page():
         return flask.redirect(flask.url_for('index_page'))
     return flask.render_template("/accounts/login.html")
 
+
 @betting.app.route('/login/')
 def login_reroute():
-    """Reroute User to correct Login Page"""
+    """Reroute User to correct Login Page."""
     return flask.redirect(flask.url_for('login_page'))
 
 

@@ -42,18 +42,20 @@ def query_db(query, args=(), one=False):
     cur.close()
     return (r_v[0] if r_v else None) if one else r_v
 
+
 def insert_bet(info, table):
+    """Insert Bet into database."""
     if table == 'upcoming':
         odds = int(info['odds'])
         wager = float(info['wager'])
         spread = float(info['spread'])
-        if(int(info['odds']) < 0):  # Negative Spread
-            to_win = round(float(-100 / odds) * wager,2)
+        if int(info['odds']) < 0:  # Negative Spread
+            to_win = round(float(-100 / odds) * wager, 2)
         else:
-            to_win = round(float(odds / 100) * wager,2)
+            to_win = round(float(odds / 100) * wager, 2)
 
         query = '''INSERT INTO upcoming (gameID, league, bet_date,
-                                         bet_time, game, selection, 
+                                         bet_time, game, selection,
                                          spread, odds, wager, to_win)
                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
 
@@ -63,5 +65,3 @@ def insert_bet(info, table):
 
         cur = get_db().execute(query, bet_info)
         cur.close()
-
-
