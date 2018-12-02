@@ -82,6 +82,7 @@ class Live extends React.Component {
             {bets.map(bet =>
               (<Bet
                 key={bet.bet_id}
+                betID={bet.bet_id}
                 game={bet.game}
                 selection={bet.selection}
                 spread={bet.spread}
@@ -104,7 +105,8 @@ const Bet = props => (
     <td>{props.odds}</td>
     <td>${props.wager}</td>
     <td>${props.to_win}</td>
-  </tr>);
+  </tr>
+);
 
 Live.propTypes = {
   api_key: PropTypes.string.isRequired,
