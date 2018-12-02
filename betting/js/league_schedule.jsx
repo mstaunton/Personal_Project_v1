@@ -14,11 +14,15 @@ class League_Schedule extends React.Component {
 
   render() {
     const items = this.state.games;
+    const league_logo = '/static/logos/' + this.state.league + '_logo';
     return (
       <div className="container">
-        <h2> {this.state.league} </h2>
+        <div className="league_header">
+          <img className="league_logo" src={league_logo} />
+          <h1> {this.state.league} </h1>
+        </div>
         {items.map(item =>
-          <Game key={item.id} info={item} />,
+          <Game key={item.id} league={this.state.league} info={item} />,
         )}
       </div>
     );

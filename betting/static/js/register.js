@@ -10311,39 +10311,60 @@ var Schedule = function (_React$Component) {
         'div',
         null,
         _react2.default.createElement(
-          'form',
-          { onSubmit: this.handleSubmit },
+          'div',
+          { className: 'row schedule_input row-centered' },
           _react2.default.createElement(
-            'select',
-            { value: this.state.league, onChange: this.handleChange },
+            'div',
+            { className: 'col-lg-3 col-md-3 col-sm-3' },
             _react2.default.createElement(
-              'option',
-              { value: 'Default' },
-              'Select a League'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: 'MLB' },
-              'MLB'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: 'NFL' },
-              'NFL'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: 'NBA' },
-              'NBA'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: 'NHL' },
-              'NHL'
+              'select',
+              { value: this.state.league, onChange: this.handleChange },
+              _react2.default.createElement(
+                'option',
+                { value: 'Default' },
+                'Select a League'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'MLB' },
+                'MLB'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'NFL' },
+                'NFL'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'NBA' },
+                'NBA'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'NHL' },
+                'NHL'
+              )
             )
           ),
-          _react2.default.createElement('input', { type: 'text', placeholder: 'YYYYMMDD Format', onChange: this.handleDate }),
-          _react2.default.createElement('input', { type: 'submit', value: 'Submit' })
+          _react2.default.createElement(
+            'div',
+            { className: 'col-lg-3 col-md-3 col-sm-3' },
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'Date' },
+              'Date: '
+            ),
+            _react2.default.createElement('input', { type: 'text', placeholder: 'MM-DD-YY Format', id: 'Date', onChange: this.handleDate })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-lg-3 col-md-3 col-sm-3' },
+            _react2.default.createElement(
+              'button',
+              { type: 'button', 'class': 'btn' },
+              'Submit'
+            )
+          )
         ),
         _react2.default.createElement(
           'div',
@@ -10418,19 +10439,27 @@ var League_Schedule = function (_React$Component) {
   _createClass(League_Schedule, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var items = this.state.games;
+      var league_logo = '/static/logos/' + this.state.league + '_logo';
       return _react2.default.createElement(
         'div',
         { className: 'container' },
         _react2.default.createElement(
-          'h2',
-          null,
-          ' ',
-          this.state.league,
-          ' '
+          'div',
+          { className: 'league_header' },
+          _react2.default.createElement('img', { className: 'league_logo', src: league_logo }),
+          _react2.default.createElement(
+            'h1',
+            null,
+            ' ',
+            this.state.league,
+            ' '
+          )
         ),
         items.map(function (item) {
-          return _react2.default.createElement(_games2.default, { key: item.id, info: item });
+          return _react2.default.createElement(_games2.default, { key: item.id, league: _this2.state.league, info: item });
         })
       );
     }
@@ -10514,9 +10543,15 @@ var Game = function (_React$Component) {
     key: 'handleClick',
     value: function handleClick(event) {
       console.log("Game Selected, Display Bet options");
-      this.setState({
-        display_options: true
-      });
+      if (this.state.display_options) {
+        this.setState({
+          display_options: false
+        });
+      } else {
+        this.setState({
+          display_options: true
+        });
+      }
     }
   }, {
     key: 'render',
@@ -10524,15 +10559,24 @@ var Game = function (_React$Component) {
       var bet_options = null;
       if (this.state.display_options) {
         bet_options = _react2.default.createElement(_bet_selection2.default, {
+          gameID: this.props.info.id,
+          date: this.props.info.date,
+          time: this.state.time,
           away_team: this.state.awayinfo.Name,
           home_team: this.state.homeinfo.Name
         });
       }
-      var home_logo = '/static/logos/nfl/' + this.state.homeinfo.Name;
-      var away_logo = '/static/logos/nfl/' + this.state.awayinfo.Name;
+      var home_logo = '/static/logos/' + this.props.league + '/' + this.state.homeinfo.Name;
+      var away_logo = '/static/logos/' + this.props.league + '/' + this.state.awayinfo.Name;
+      var button = null;
+      if (this.state.display_options) {
+        button = _react2.default.createElement(CancelButton, { onClick: this.handleClick });
+      } else {
+        button = _react2.default.createElement(SelectButton, { onClick: this.handleClick });
+      }
       return _react2.default.createElement(
         'div',
-        { className: 'row' },
+        { className: 'row game' },
         _react2.default.createElement(
           'div',
           { className: 'row vertical-align' },
@@ -10600,11 +10644,7 @@ var Game = function (_React$Component) {
               this.state.time,
               ' ET'
             ),
-            _react2.default.createElement(
-              'button',
-              { type: 'button', 'class': 'btn', onClick: this.handleClick },
-              'Select'
-            )
+            button
           )
         ),
         _react2.default.createElement(
@@ -10618,6 +10658,22 @@ var Game = function (_React$Component) {
 
   return Game;
 }(_react2.default.Component);
+
+function SelectButton(props) {
+  return _react2.default.createElement(
+    'button',
+    { id: 'select-cancel-button', onClick: props.onClick },
+    'Select'
+  );
+}
+
+function CancelButton(props) {
+  return _react2.default.createElement(
+    'button',
+    { id: 'select-cancel-button', onClick: props.onClick },
+    'Cancel'
+  );
+}
 
 exports.default = Game;
 
@@ -10683,6 +10739,9 @@ var Bet_Selections = function (_React$Component) {
       if (bet_type !== 'Default') {
         bet_parameters = _react2.default.createElement(Bet_Parameters, {
           bet_type: this.state.bet_type,
+          date: this.props.date,
+          time: this.props.time,
+          gameID: this.props.gameID,
           home_team: this.props.home_team,
           away_team: this.props.away_team
         });
@@ -10741,7 +10800,8 @@ var Bet_Parameters = function (_React$Component2) {
     _this2.state = {
       bet_odds: 0,
       bet_wager: 0,
-      bet_input: 0
+      bet_input: '',
+      bet_spread: 0
     };
     _this2.handleChange = _this2.handleChange.bind(_this2);
     _this2.handleSubmit = _this2.handleSubmit.bind(_this2);
@@ -10758,8 +10818,29 @@ var Bet_Parameters = function (_React$Component2) {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
       event.preventDefault();
-      console.log("Submit button pressed");
-      console.log(this.state.bet_odds);
+      var game = this.props.away_team + ' @ ' + this.props.home_team;
+      var info = {
+        gameID: this.props.gameID,
+        date: this.props.date,
+        time: this.props.time,
+        game: game,
+        selection: this.state.bet_input,
+        spread: this.state.bet_spread,
+        odds: this.state.bet_odds,
+        wager: this.state.bet_wager
+      };
+      fetch('/api/v1/register/', {
+        method: 'POST',
+        body: JSON.stringify({ info: info }),
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function (response) {
+        if (!response.ok) throw Error(response.statusText);
+      }).catch(function (error) {
+        return console.log(error);
+      }); // eslint-disable-line no-console
     }
   }, {
     key: 'render',
@@ -10770,7 +10851,7 @@ var Bet_Parameters = function (_React$Component2) {
           { className: 'bet-input' },
           _react2.default.createElement(
             'select',
-            null,
+            { name: 'bet_input', value: this.state.bet_input, onChange: this.handleChange },
             _react2.default.createElement(
               'option',
               { value: 'Default' },
@@ -10778,30 +10859,30 @@ var Bet_Parameters = function (_React$Component2) {
             ),
             _react2.default.createElement(
               'option',
-              { value: 'Spread' },
+              { value: this.props.away_team },
               this.props.away_team
             ),
             _react2.default.createElement(
               'option',
-              { value: 'Total' },
+              { value: this.props.home_team },
               this.props.home_team
             )
           ),
           _react2.default.createElement(
             'label',
-            { 'for': 'Spread' },
+            { htmlFor: 'Spread' },
             'Spread: '
           ),
-          _react2.default.createElement('input', { type: 'text', name: 'bet_input', id: 'Spread', value: this.state.bet_input, onChange: this.handleChange }),
+          _react2.default.createElement('input', { type: 'text', name: 'bet_spread', id: 'Spread', value: this.state.bet_selection, onChange: this.handleChange }),
           _react2.default.createElement(
             'label',
-            { 'for': 'Odds' },
+            { htmlFor: 'Odds' },
             'Odds: '
           ),
           _react2.default.createElement('input', { type: 'text', name: 'bet_odds', id: 'Odds', value: this.state.bet_odds, onChange: this.handleChange }),
           _react2.default.createElement(
             'label',
-            { 'for': 'Wager' },
+            { htmlFor: 'Wager' },
             'Wager: '
           ),
           _react2.default.createElement('input', { type: 'text', name: 'bet_wager', id: 'Wager', value: this.state.bet_wager, onChange: this.handleChange }),
@@ -10813,7 +10894,7 @@ var Bet_Parameters = function (_React$Component2) {
           null,
           _react2.default.createElement(
             'select',
-            null,
+            { name: 'bet_input', value: this.state.bet_input, onChange: this.handleChange },
             _react2.default.createElement(
               'option',
               { value: 'Default' },
@@ -10835,7 +10916,7 @@ var Bet_Parameters = function (_React$Component2) {
             { 'for': 'Total' },
             'Total: '
           ),
-          _react2.default.createElement('input', { type: 'text', name: 'bet_input', id: 'Total', value: this.state.bet_input, onChange: this.handleChange }),
+          _react2.default.createElement('input', { type: 'text', name: 'bet_spread', id: 'Total', value: this.state.bet_spread, onChange: this.handleChange }),
           _react2.default.createElement(
             'label',
             { 'for': 'Odds' },
@@ -10856,7 +10937,7 @@ var Bet_Parameters = function (_React$Component2) {
           { className: 'bet-input' },
           _react2.default.createElement(
             'select',
-            null,
+            { name: 'bet_input', value: this.state.bet_input, onChange: this.handleChange },
             _react2.default.createElement(
               'option',
               { value: 'Default' },
@@ -10864,12 +10945,12 @@ var Bet_Parameters = function (_React$Component2) {
             ),
             _react2.default.createElement(
               'option',
-              { value: 'Spread' },
+              { value: this.props.away_team },
               this.props.away_team
             ),
             _react2.default.createElement(
               'option',
-              { value: 'Total' },
+              { value: this.props.home_team },
               this.props.home_team
             )
           ),

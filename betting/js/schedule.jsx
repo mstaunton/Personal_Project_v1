@@ -69,17 +69,24 @@ class Schedule extends React.Component {
     ];
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <select value={this.state.league} onChange={this.handleChange}>
-            <option value="Default">Select a League</option>
-            <option value="MLB">MLB</option>
-            <option value="NFL">NFL</option>
-            <option value="NBA">NBA</option>
-            <option value="NHL">NHL</option>
-          </select>
-          <input type="text" placeholder="YYYYMMDD Format" onChange={this.handleDate} />
-          <input type="submit" value="Submit" />
-        </form>
+        <div className="row schedule_input row-centered">
+          <div className="col-lg-3 col-md-3 col-sm-3">
+            <select value={this.state.league} onChange={this.handleChange}>
+              <option value="Default">Select a League</option>
+              <option value="MLB">MLB</option>
+              <option value="NFL">NFL</option>
+              <option value="NBA">NBA</option>
+              <option value="NHL">NHL</option>
+            </select>
+          </div>
+          <div className="col-lg-3 col-md-3 col-sm-3">
+            <label htmlFor="Date">Date: </label>
+            <input type="text" placeholder="MM-DD-YY Format" id="Date" onChange={this.handleDate} />
+          </div>
+          <div className="col-lg-3 col-md-3 col-sm-3">
+            <button type="button" class="btn">Submit</button>
+          </div>
+        </div>
         <div className="schedule">
           {schedules.map(item =>
             <League_Schedule key={item.league} league={item.league} games={item.games} />,

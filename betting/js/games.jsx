@@ -25,23 +25,38 @@ class Game extends React.Component {
 
   handleClick(event) {
     console.log("Game Selected, Display Bet options")
-    this.setState({
-      display_options: true
-    });
+    if (this.state.display_options) {
+      this.setState({
+        display_options: false,
+      });
+    } else {
+      this.setState({
+        display_options: true,
+      });
+    }
   }
 
   render() {
     let bet_options = null;
     if (this.state.display_options){
       bet_options = <Bet_Selections
+                     gameID = {this.props.info.id}
+                     date = {this.props.info.date}
+                     time = {this.state.time}
                      away_team = {this.state.awayinfo.Name}
                      home_team = {this.state.homeinfo.Name}
                      />
     }
-    let home_logo = '/static/logos/nfl/' + this.state.homeinfo.Name;
-    let away_logo = '/static/logos/nfl/' + this.state.awayinfo.Name;
+    let home_logo = '/static/logos/' + this.props.league + '/' + this.state.homeinfo.Name;
+    let away_logo = '/static/logos/' + this.props.league + '/' + this.state.awayinfo.Name;
+    let button = null;
+    if (this.state.display_options) {
+      button = <CancelButton onClick={this.handleClick} />
+    } else {
+      button = <SelectButton onClick={this.handleClick} />
+    }
     return (
-      <div className="row" >
+      <div className="row game" >
         <div className="row vertical-align">
           <div className="col-lg-2 col-xl-2">
             <img src={away_logo} className="logo" alt="Away Team" />
@@ -66,7 +81,7 @@ class Game extends React.Component {
           </div>
           <div className="col-lg-1 col-xl-1">
             <p>{this.state.time} ET</p>
-            <button type="button" class="btn" onClick={this.handleClick}>Select</button>
+            {button}
           </div>
         </div>
         <div>
@@ -75,6 +90,22 @@ class Game extends React.Component {
       </div>
     );
   }
+}
+
+function SelectButton(props) {
+  return (
+    <button id="select-cancel-button" onClick={props.onClick}>
+      Select
+    </button>
+  );
+}
+
+function CancelButton(props) {
+  return (
+    <button id="select-cancel-button" onClick={props.onClick}>
+      Cancel
+    </button>
+  );
 }
 
 export default Game;
