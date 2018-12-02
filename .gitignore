@@ -6,3 +6,4 @@ bundle.js/
 .DS_Store
 *.egg-info/
 .eslintrc.js
+var/betting.sqlite3
