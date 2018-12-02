@@ -10389,6 +10389,7 @@ var Live = function (_React$Component) {
             bets.map(function (bet) {
               return _react2.default.createElement(Bet, {
                 key: bet.bet_id,
+                betID: bet.bet_id,
                 game: bet.game,
                 selection: bet.selection,
                 spread: bet.spread,

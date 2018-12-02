@@ -10722,6 +10722,7 @@ var Bet_Selections = function (_React$Component) {
       bet_type: 'Default'
     };
     _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
   }
 
@@ -10730,6 +10731,28 @@ var Bet_Selections = function (_React$Component) {
     value: function handleChange(event) {
       console.log("Change Event Occurred");
       this.setState(_defineProperty({}, event.target.name, event.target.value));
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(info) {
+      var _this2 = this;
+
+      fetch('/api/v1/register/', {
+        method: 'POST',
+        body: JSON.stringify({ info: info }),
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function (response) {
+        if (!response.ok) throw Error(response.statusText);
+      }).then(function () {
+        _this2.setState({
+          bet_type: 'Default'
+        });
+      }).catch(function (error) {
+        return console.log(error);
+      }); // eslint-disable-line no-console
     }
   }, {
     key: 'render',
@@ -10743,7 +10766,8 @@ var Bet_Selections = function (_React$Component) {
           time: this.props.time,
           gameID: this.props.gameID,
           home_team: this.props.home_team,
-          away_team: this.props.away_team
+          away_team: this.props.away_team,
+          handleClick: this.handleSubmit
         });
       }
       return _react2.default.createElement(
@@ -10795,17 +10819,17 @@ var Bet_Parameters = function (_React$Component2) {
   function Bet_Parameters(props) {
     _classCallCheck(this, Bet_Parameters);
 
-    var _this2 = _possibleConstructorReturn(this, (Bet_Parameters.__proto__ || Object.getPrototypeOf(Bet_Parameters)).call(this, props));
+    var _this3 = _possibleConstructorReturn(this, (Bet_Parameters.__proto__ || Object.getPrototypeOf(Bet_Parameters)).call(this, props));
 
-    _this2.state = {
+    _this3.state = {
       bet_odds: 0,
       bet_wager: 0,
       bet_input: '',
       bet_spread: 0
     };
-    _this2.handleChange = _this2.handleChange.bind(_this2);
-    _this2.handleSubmit = _this2.handleSubmit.bind(_this2);
-    return _this2;
+    _this3.handleChange = _this3.handleChange.bind(_this3);
+    _this3.handleClick = _this3.handleClick.bind(_this3);
+    return _this3;
   }
 
   _createClass(Bet_Parameters, [{
@@ -10815,9 +10839,8 @@ var Bet_Parameters = function (_React$Component2) {
       this.setState(_defineProperty({}, event.target.name, event.target.value));
     }
   }, {
-    key: 'handleSubmit',
-    value: function handleSubmit(event) {
-      event.preventDefault();
+    key: 'handleClick',
+    value: function handleClick() {
       var game = this.props.away_team + ' @ ' + this.props.home_team;
       var info = {
         gameID: this.props.gameID,
@@ -10829,18 +10852,8 @@ var Bet_Parameters = function (_React$Component2) {
         odds: this.state.bet_odds,
         wager: this.state.bet_wager
       };
-      fetch('/api/v1/register/', {
-        method: 'POST',
-        body: JSON.stringify({ info: info }),
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(function (response) {
-        if (!response.ok) throw Error(response.statusText);
-      }).catch(function (error) {
-        return console.log(error);
-      }); // eslint-disable-line no-console
+      var handleSubmit = this.props.handleClick;
+      handleSubmit(info);
     }
   }, {
     key: 'render',
@@ -10886,7 +10899,7 @@ var Bet_Parameters = function (_React$Component2) {
             'Wager: '
           ),
           _react2.default.createElement('input', { type: 'text', name: 'bet_wager', id: 'Wager', value: this.state.bet_wager, onChange: this.handleChange }),
-          _react2.default.createElement('input', { type: 'submit', value: 'Submit', onClick: this.handleSubmit })
+          _react2.default.createElement('input', { type: 'submit', value: 'Submit', onClick: this.handleClick })
         );
       } else if (this.props.bet_type === 'Total') {
         return _react2.default.createElement(
@@ -10929,7 +10942,7 @@ var Bet_Parameters = function (_React$Component2) {
             'Wager: '
           ),
           _react2.default.createElement('input', { type: 'text', name: 'bet_wager', id: 'Wager', value: this.state.bet_wager, onChange: this.handleChange }),
-          _react2.default.createElement('input', { type: 'submit', value: 'Submit', onClick: this.handleSubmit })
+          _react2.default.createElement('input', { type: 'submit', value: 'Submit', onClick: this.handleClick })
         );
       } else if (this.props.bet_type === 'ML') {
         return _react2.default.createElement(
@@ -10966,7 +10979,7 @@ var Bet_Parameters = function (_React$Component2) {
             'Wager: '
           ),
           _react2.default.createElement('input', { type: 'text', name: 'bet_wager', id: 'Wager', value: this.state.bet_wager, onChange: this.handleChange }),
-          _react2.default.createElement('input', { type: 'submit', value: 'Submit', onClick: this.handleSubmit })
+          _react2.default.createElement('input', { type: 'submit', value: 'Submit', onClick: this.handleClick })
         );
       }
     }

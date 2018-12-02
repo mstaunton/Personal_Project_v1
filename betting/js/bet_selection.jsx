@@ -9,6 +9,7 @@ class Bet_Selections extends React.Component {
       bet_type: 'Default',
     }
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -16,6 +17,26 @@ class Bet_Selections extends React.Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
+  }
+
+  handleSubmit(info){
+    fetch('/api/v1/register/', {
+      method: 'POST',
+      body: JSON.stringify({info: info}),
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if (!response.ok) throw Error(response.statusText);
+    })
+      .then(() => {
+        this.setState({
+          bet_type: 'Default',
+        })
+    })
+      .catch(error => console.log(error)); // eslint-disable-line no-console
   }
 
   render() {
@@ -29,6 +50,7 @@ class Bet_Selections extends React.Component {
                         gameID = {this.props.gameID}
     	                  home_team = {this.props.home_team}
     	                  away_team = {this.props.away_team}
+                        handleClick = {this.handleSubmit}
     	                  />
     }
   	return (
@@ -59,7 +81,7 @@ class Bet_Parameters extends React.Component {
       bet_spread: 0,
     }
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(event) {
@@ -69,8 +91,7 @@ class Bet_Parameters extends React.Component {
     });
   }
 
-  handleSubmit(event) {
-  	event.preventDefault();
+  handleClick() {
     let game = this.props.away_team + ' @ ' + this.props.home_team
     let info = {
                  gameID: this.props.gameID,
@@ -82,18 +103,8 @@ class Bet_Parameters extends React.Component {
                  odds: this.state.bet_odds,
                  wager: this.state.bet_wager,
                }
-    fetch('/api/v1/register/', {
-      method: 'POST',
-      body: JSON.stringify({info: info}),
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => {
-        if (!response.ok) throw Error(response.statusText);
-    })
-      .catch(error => console.log(error)); // eslint-disable-line no-console
+    let handleSubmit = this.props.handleClick;
+    handleSubmit(info);
   }
 
   render() {
@@ -111,7 +122,7 @@ class Bet_Parameters extends React.Component {
           <input type="text" name="bet_odds" id="Odds" value={this.state.bet_odds} onChange={this.handleChange} />
           <label htmlFor="Wager">Wager: </label>
           <input type="text" name="bet_wager" id="Wager" value={this.state.bet_wager} onChange={this.handleChange} />
-          <input type="submit" value="Submit" onClick={this.handleSubmit}/>
+          <input type="submit" value="Submit" onClick={this.handleClick}/>
         </div>
       );
     } else if (this.props.bet_type === 'Total') {
@@ -128,7 +139,7 @@ class Bet_Parameters extends React.Component {
           <input type="text" name="bet_odds" id="Odds" value={this.state.bet_odds} onChange={this.handleChange} />
           <label for="Wager">Wager: </label>
           <input type="text" name="bet_wager" id="Wager" value={this.state.bet_wager} onChange={this.handleChange} />
-          <input type="submit" value="Submit" onClick={this.handleSubmit}/>
+          <input type="submit" value="Submit" onClick={this.handleClick}/>
         </div>
       );
     } else if (this.props.bet_type === 'ML') {
@@ -143,7 +154,7 @@ class Bet_Parameters extends React.Component {
           <input type="text" name="bet_odds" id="Odds" value={this.state.bet_odds} onChange={this.handleChange} />
           <label for="Wager">Wager: </label>
           <input type="text" name="bet_wager" id="Wager" value={this.state.bet_wager} onChange={this.handleChange} />
-          <input type="submit" value="Submit" onClick={this.handleSubmit}/>
+          <input type="submit" value="Submit" onClick={this.handleClick}/>
         </div>
       );
     }

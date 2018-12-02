@@ -10252,6 +10252,7 @@ var Upcoming = function (_React$Component) {
     };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleCancel = _this.handleCancel.bind(_this);
     return _this;
   }
 
@@ -10280,6 +10281,30 @@ var Upcoming = function (_React$Component) {
       console.log("Submit Button Pressed");
     }
   }, {
+    key: 'handleCancel',
+    value: function handleCancel(betID) {
+      var _this3 = this;
+
+      console.log(betID);
+      var api_url = '/api/v1/upcoming/?betID=' + betID;
+      fetch(api_url, {
+        method: 'DELETE',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function (response) {
+        if (!response.ok) throw Error(response.statusText);
+        return response.json();
+      }).then(function (data) {
+        _this3.setState({
+          list_bets: data.bets
+        });
+      }).catch(function (error) {
+        return console.log(error);
+      }); // eslint-disable-line no-console
+    }
+  }, {
     key: 'handleChange',
     value: function handleChange(event) {
       this.setState({
@@ -10289,6 +10314,8 @@ var Upcoming = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this4 = this;
+
       var bets = this.state.list_bets;
       return _react2.default.createElement(
         'div',
@@ -10389,6 +10416,7 @@ var Upcoming = function (_React$Component) {
             bets.map(function (bet) {
               return _react2.default.createElement(Bet, {
                 key: bet.bet_id,
+                betID: bet.betID,
                 date: bet.bet_date,
                 time: bet.bet_time,
                 game: bet.game,
@@ -10396,7 +10424,8 @@ var Upcoming = function (_React$Component) {
                 spread: bet.spread,
                 odds: bet.odds,
                 wager: bet.wager,
-                to_win: bet.to_win
+                to_win: bet.to_win,
+                handleClick: _this4.handleCancel
               });
             })
           )
@@ -10408,65 +10437,106 @@ var Upcoming = function (_React$Component) {
   return Upcoming;
 }(_react2.default.Component);
 
-var Bet = function Bet(props) {
-  return _react2.default.createElement(
-    'tr',
-    null,
-    _react2.default.createElement(
-      'td',
-      null,
-      props.date
-    ),
-    _react2.default.createElement(
-      'td',
-      null,
-      props.time,
-      ' ET'
-    ),
-    _react2.default.createElement(
-      'td',
-      null,
-      props.game
-    ),
-    _react2.default.createElement(
-      'td',
-      null,
-      props.selection,
-      ' ',
-      props.spread
-    ),
-    _react2.default.createElement(
-      'td',
-      null,
-      props.odds
-    ),
-    _react2.default.createElement(
-      'td',
-      null,
-      '$',
-      props.wager
-    ),
-    _react2.default.createElement(
-      'td',
-      null,
-      '$',
-      props.to_win
-    ),
-    _react2.default.createElement(
-      'td',
-      null,
-      _react2.default.createElement(
-        'button',
-        { type: 'button', 'class': 'close', 'aria-label': 'Close' },
+var Bet = function (_React$Component2) {
+  _inherits(Bet, _React$Component2);
+
+  function Bet(props) {
+    _classCallCheck(this, Bet);
+
+    var _this5 = _possibleConstructorReturn(this, (Bet.__proto__ || Object.getPrototypeOf(Bet)).call(this, props));
+
+    _this5.state = {
+      betID: props.betID
+    };
+    return _this5;
+  }
+
+  _createClass(Bet, [{
+    key: 'render',
+    value: function render() {
+      var _this6 = this;
+
+      var handleCancel = this.props.handleClick;
+      return _react2.default.createElement(
+        'tr',
+        null,
         _react2.default.createElement(
-          'span',
-          { 'aria-hidden': 'true' },
-          '\xD7'
+          'td',
+          null,
+          this.props.date
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          this.props.time,
+          ' ET'
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          this.props.game
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          this.props.selection,
+          ' ',
+          this.props.spread
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          this.props.odds
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          '$',
+          this.props.wager
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          '$',
+          this.props.to_win
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          _react2.default.createElement(
+            'button',
+            { type: 'button', onClick: function onClick() {
+                return handleCancel(_this6.state.betID);
+              }, className: 'close', 'aria-label': 'Close' },
+            _react2.default.createElement(
+              'span',
+              { 'aria-hidden': 'true' },
+              '\xD7'
+            )
+          )
         )
-      )
-    )
-  );
-};
+      );
+    }
+  }]);
+
+  return Bet;
+}(_react2.default.Component);
+
+// const Bet = props => (
+//   <tr>
+//     <td>{props.date}</td>
+//     <td>{props.time} ET</td>
+//     <td>{props.game}</td>
+//     <td>{props.selection} {props.spread}</td>
+//     <td>{props.odds}</td>
+//     <td>${props.wager}</td>
+//     <td>${props.to_win}</td>
+//     <td>
+//       <button type="button" class="close" aria-label="Close">
+//         <span aria-hidden="true">&times;</span>
+//       </button>
+//     </td>
+//   </tr>);
 
 Upcoming.propTypes = {
   api_key: _propTypes2.default.string.isRequired
@@ -10477,9 +10547,9 @@ Bet.propTypes = {
   time: _propTypes2.default.string.isRequired,
   game: _propTypes2.default.string.isRequired,
   selection: _propTypes2.default.string.isRequired,
-  spread: _propTypes2.default.string.isRequired,
-  wager: _propTypes2.default.string.isRequired,
-  to_win: _propTypes2.default.string.isRequired
+  spread: _propTypes2.default.number.isRequired,
+  wager: _propTypes2.default.number.isRequired,
+  to_win: _propTypes2.default.number.isRequired
 };
 
 exports.default = Upcoming;
