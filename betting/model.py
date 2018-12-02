@@ -52,12 +52,12 @@ def insert_bet(info, table):
         else:
             to_win = round(float(odds / 100) * wager,2)
 
-        query = '''INSERT INTO upcoming (gameID, bet_date, 
+        query = '''INSERT INTO upcoming (gameID, league, bet_date,
                                          bet_time, game, selection, 
                                          spread, odds, wager, to_win)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
 
-        bet_info = (info['gameID'], info['date'], info['time'],
+        bet_info = (info['gameID'], info['league'], info['date'], info['time'],
                     info['game'], info['selection'], spread,
                     odds, wager, to_win)
 

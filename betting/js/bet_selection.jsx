@@ -20,6 +20,7 @@ class Bet_Selections extends React.Component {
   }
 
   handleSubmit(info){
+    console.log(info)
     fetch('/api/v1/register/', {
       method: 'POST',
       body: JSON.stringify({info: info}),
@@ -50,6 +51,7 @@ class Bet_Selections extends React.Component {
                         gameID = {this.props.gameID}
     	                  home_team = {this.props.home_team}
     	                  away_team = {this.props.away_team}
+                        league = {this.props.league}
                         handleClick = {this.handleSubmit}
     	                  />
     }
@@ -97,6 +99,7 @@ class Bet_Parameters extends React.Component {
                  gameID: this.props.gameID,
                  date: this.props.date,
                  time: this.props.time,
+                 league: this.props.league,
                  game: game,
                  selection: this.state.bet_input,
                  spread: this.state.bet_spread,

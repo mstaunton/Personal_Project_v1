@@ -45,6 +45,7 @@ class Game extends React.Component {
                      time = {this.state.time}
                      away_team = {this.state.awayinfo.Name}
                      home_team = {this.state.homeinfo.Name}
+                     league = {this.props.league}
                      />
     }
     let home_logo = '/static/logos/' + this.props.league + '/' + this.state.homeinfo.Name;

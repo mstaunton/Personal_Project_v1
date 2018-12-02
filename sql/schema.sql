@@ -1,6 +1,7 @@
 CREATE TABLE upcoming(
 	betID INTEGER Primary Key,
 	gameID INTEGER NOT NULL,
+	league VARCHAR(20) NOT NULL,
 	bet_date VARCHAR(20) NOT NULL,
 	bet_time VARCHAR(20) NOT NULL,
 	game VARCHAR(40) NOT NULL,
